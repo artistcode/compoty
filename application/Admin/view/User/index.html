@@ -107,6 +107,23 @@
         </div>
     </form>
 </script>
+<script type="text/html" id="repassword">
+    <form id="repasswd" lay-filter="repasswd" class="layui-form model-form">
+        <input name="admin_id" type="hidden"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-block">
+                <input name="admin_nickname" placeholder="请输入昵称" type="text" class="layui-input" maxlength="20"
+                       lay-verType="tips" lay-verify="required" required/>
+            </div>
+        </div>
+
+        <div class="layui-form-item text-right">
+            <button class="layui-btn layui-btn-primary" type="button" ew-event="closePageDialog">取消</button>
+            <button class="layui-btn" lay-filter="repasswdsubmit" lay-submit>保存</button>
+        </div>
+    </form>
+</script>
 
 <!-- js部分 -->
 
@@ -118,7 +135,6 @@
         var table = layui.table;
         var util = layui.util;
         var admin = layui.admin;
-
         // 渲染表格
         var insTb = table.render({
             elem: '#tableUser',
