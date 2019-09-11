@@ -32,15 +32,16 @@
                 </div>
             </div>
 
-            <table class="layui-table" id="tableAuth" lay-filter="tableAuth"></table>
+            <table class="layui-table" id="column_table" lay-filter="column_table"></table>
         </div>
     </div>
 </div>
 
 <!-- 表格操作列 -->
-<script type="text/html" id="tableBarAuth">
+<script type="text/html" id="column_edit">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="add">添加</a>
 </script>
 <!-- 表单弹窗 -->
 <script type="text/html" id="modelAuth">
@@ -125,8 +126,8 @@
                 treeSpid: 0,
                 treeIdName: 'menu_id',
                 treePidName: 'menu_parent_id',
-                elem: '#tableAuth',
-                url: '{:url("admin/menu/index")}',
+                elem: '#column_table',
+                url: '{:url("admin/Column/index")}',
 
                 cellMinWidth: 100,
                 cols: [[
@@ -140,15 +141,15 @@
                     {
                         field: 'icon', title: '图标', align: 'center', templet: function (d) {
                             let html = d.icon ? '  <i class="layui-icon ' + d.icon + '"></i> ' : '<font color="red">无图标</font>';
-
                             return html;
                         }
                     },
+
                     {field: 'sort', title: '排序号', align: 'center'},
-                    {templet: '#tableBarAuth', title: '操作', align: 'center', minWidth: 120}
+                    {templet: '#column_edit', title: '操作', align: 'center', minWidth: 120}
                 ]],
                 done: function () {
-                    treetable.foldAll('#tableAuth');
+                    treetable.foldAll('#column_table');
                 }
             });
         }
@@ -169,6 +170,7 @@
                 doDel(data.id, data.menu_name);
             }
         });
+
 
         // 删除
         function doDel(authorityId, authorityName) {
@@ -210,7 +212,7 @@
                         // 选择器
                         elem: '#tree',
                         // 数据
-                        data: '{:url("admin/menu/add")}',
+                        data: '{:url("admin/column/add")}',
                         // 异步加载方式：get/post，默认get
                         type: 'get',
                         // 占位符
@@ -229,14 +231,14 @@
                         treeSelect.checkNode('tree', mAuth.menu_parent_id);
                         iconPicker.checkIcon('iconPicker', mAuth.icon);
                     }
-//                treeSelect.checkNode('tree', 3);
+/*             treeSelect.checkNode('tree', 3);
 
-//                获取zTree对象，可以调用zTree方法
-//                var treeObj = treeSelect.zTree('tree');
-//                console.log(treeObj);
+             获取zTree对象，可以调用zTree方法
+             var treeObj = treeSelect.zTree('tree');
+             console.log(treeObj);
 
-//                刷新树结构
-//                treeSelect.refresh();
+             刷新树结构
+             treeSelect.refresh();*/
                         }
                     });
                     iconPicker.render({

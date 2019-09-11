@@ -6,17 +6,17 @@ use think\View;
 use \think\Request;
 use \think\Db;
 use \think\Loader;
+
 class Menu extends Common
 {
     Public function  index(){
         if(Request::instance()->isAjax()){
 
            if(Request::instance()->isGet()){
-              $data =  Db::name('admin_menu')->select();
-
+              $data =  Db::name('admin_menu')->order('sort asc ')->select();
                    $interface = array('code'=>0,'msg'=>'数据返回成功','count'=>1000,'data'=>$data);
                    echo json_encode($interface);
-            return; //退出
+                  return; //退出
            }
         }
        $view = new View;
@@ -28,14 +28,11 @@ class Menu extends Common
        /*post 请求*/
         if(Request::instance()->isPost()){
                    //$user = Loader::model("User");
-
                      $res = Db::name('admin_menu')->insert(input('post.'));
-
                     if($res){
                       $code = 200;
                       $massage = '添加成功';
                    }else{
-
                        $code  = 500;
                        $massage = '添加失败';
                    }
@@ -43,7 +40,7 @@ class Menu extends Common
        if(Request::instance()->isGet()){
            $menu = Db::name('admin_menu')
                     ->field('menu_id as id,menu_name as name ,menu_parent_id as pid ')
-                    ->select();
+                    ->order('sort asc ')->select();
          $interface =   $this->getTree($menu);
            array_unshift($interface,array('id'=>0,'name'=>'顶级菜单','pid'=>0));
          echo  json_encode($interface);
@@ -91,8 +88,6 @@ class Menu extends Common
                    return;
 
               }
-
-
                public function  upd(){
                      if(Request::instance()->isAjax()){
                        /* 处理ajax 请求 */
@@ -109,7 +104,6 @@ class Menu extends Common
                               $code =404;
                               $msg = '修改失败';
                            }
-
                        $interface =  array('code'=>$code,'msg'=>$msg);
                         echo json_encode($interface);
                         return;  /*处理完成退出函数*/

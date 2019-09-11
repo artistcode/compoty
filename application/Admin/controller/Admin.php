@@ -8,7 +8,7 @@ use \think\Request;
 use \think\Db;
 use \think\Loader;
 
-class User extends Common
+class Admin extends Common
 {
 
     /*用户列表*/

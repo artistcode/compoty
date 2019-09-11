@@ -138,7 +138,7 @@
         // 渲染表格
         var insTb = table.render({
             elem: '#tableUser',
-            url: '{:url("admin/user/index")}',
+            url: '{:url("admin/Admin/index")}',
             page: true,
             toolbar: true,
             cellMinWidth: 100,
@@ -169,7 +169,7 @@
         });
         // 添加
         $('#btnAddUser').click(function () {
-            showEditModel('{:url("admin/user/add")}');
+            showEditModel('{:url("admin/Admin/add")}');
         });
         // 搜索
         form.on('submit(formSubSearchUser)', function (data) {
@@ -181,7 +181,7 @@
             var data = obj.data;
             var layEvent = obj.event;
             if (layEvent === 'edit') { // 修改
-                showEditModel('{:url("admin/user/upd")}',data);
+                showEditModel('{:url("admin/Admin/upd")}',data);
             } else if (layEvent === 'del') { // 删除
                 doDel(data.admin_id, data.admin_nickname);
             } else if (layEvent === 'reset') { // 重置密码
@@ -230,7 +230,7 @@
             }, function (i) {
                 layer.close(i);
                 layer.load(2);
-                $.get('{:url("admin/user/del")}', {
+                $.get('{:url("admin/Admin/del")}', {
                     admin_id: admin_id
                 }, function (res) {
                     layer.closeAll('loading');
@@ -247,7 +247,7 @@
         // 修改用户状态
         form.on('switch(ckStateUser)', function (obj) {
             layer.load(2);
-            $.get('{:url("admin/user/upd")}', {
+            $.get('{:url("admin/Admin/upd")}', {
                 admin_id: obj.elem.value,
                 status: obj.elem.checked ? 0 : 1
             }, function (res) {
@@ -271,7 +271,7 @@
             }, function (i) {
                 layer.close(i);
                 layer.load(2);
-                $.get('{:url("admin/user/upd")}', {
+                $.get('{:url("admin/Admin/upd")}', {
                     admin_id: userId
                 }, function (res) {
                     layer.closeAll('loading');
@@ -283,7 +283,7 @@
                 }, 'json');
             });
         }
-
+  退换
     });
 </script>
 

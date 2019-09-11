@@ -11,10 +11,12 @@ class Group extends  Common
     {
         $view = new View();
 
+
         if(Request::instance()->isAjax()){
              $data  =   Db::name('admin_group')->page(sprintf('%s,%s',input('get.page'),input('get.limit')))->select();
                  $count = Db::name('admin_group')->count();
                          $interface =  array('code'=>0,'count'=>$count,'msg'=>'数据返回成功','data'=>$data);
+
                          echo json_encode($interface);
                          return;
         }
@@ -116,9 +118,7 @@ class Group extends  Common
     }
 
       public function  del(){
-
-
-            $res = Db::name('admin_group')->delete(input('get.admin_group_id'));
+            $res = Db::name('Module')->delete(input('get.id'));
             $code  = 404;
             $msg = '操作失败';
             if($res){
